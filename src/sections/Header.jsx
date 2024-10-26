@@ -2,19 +2,6 @@ import { Link as LinkScroll } from "react-scroll";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
-const NavLink = ({ title }) => (
-  <LinkScroll
-    to={title}
-    offset={-100}
-    spy
-    smooth
-    className="base-bold text-p4 
-    uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
-  >
-    {title}
-  </LinkScroll>
-);
-
 const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +17,20 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const NavLink = ({ title }) => (
+    <LinkScroll
+      onClick={() => setIsOpen(false)} //when you click features on navbar mobile view, it will close it and scross to the features
+      to={title}
+      offset={-100}
+      spy
+      smooth
+      className="base-bold text-p4 
+    uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
+    >
+      {title}
+    </LinkScroll>
+  );
 
   return (
     <header
@@ -133,3 +134,4 @@ export default Header;
 //setHasScrolled;   if u scroll more than 32 pixels, we will set setHasScrolled to true
 //window.addEventListener   for the browser to track the above function
 //11824  use hasScroll to modify the background of the nav bar
+//------spy feature turning active link to it to turn it green doesnt work 1.22.53
